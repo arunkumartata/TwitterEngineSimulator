@@ -1,18 +1,20 @@
 # TwitterEngineSimulator
 
 Program Execution:
-     1. Execute 'dotnet build' to generate messageformat dll which is shared between client and server.
-     2. Execute below commands for server and client ( you can use websocket plugin as well)
+   1. Execute 'dotnet build' to generate messageformat dll which is shared between client and server.
+   2. Execute below commands for server and client ( you can use websocket plugin as well)
         Server: 'dotnet fsi --langversion:preview .\ServerWithSocket-bonus.fsx'
         Client: 'dotnet fsi --langversion:preview .\Client-bonus.fsx'
-    Server URL to connect: 'ws://127.0.0.1:8080/api'
-    When the client program is executed it prompts messages to perform respective sub API's and prompts to enter 
-    the sub API name followed by respective data required if any to send message to server.
+   
+   Server URL to connect: 'ws://127.0.0.1:8080/api'
+   
+   When the client program is executed it prompts messages to perform respective sub API's and prompts to enter 
+   the sub API name followed by respective data required if any to send message to server.
 
 Implementation details:
-    1. REST API:
+   1. REST API:
         We have used REST API structure where client sends a message that has RequestType:<method>, RequestURL:<uri> and Body:<Json>.
-    2. Server(ServerWithSocket*.fsx file):
+   2. Server(ServerWithSocket*.fsx file):
         We have used Suave framework to creates websockets and expose API for outside world. In this file we 
         have created method that accepts connection based on the api and creates a websocket per client which
         will be active for communication till the client closes the websocket. 
@@ -21,7 +23,7 @@ Implementation details:
         This proxyactor after receiving messages from websocket stub it verifies and deserialized the jsonbody to respective message type and
         sends the data to respective actor which is implemented in 'TwitterEngine.fsx'. When client closes the socket the server socket stub sends
         poisonpill to respective proxyactor as well.
-    3. User(Client*.fsx file):
+   3. User(Client*.fsx file):
         We have used .Net frameworks clientwebsocket to connect to server api. To execute multiple clients we need to execute 
         client program in different terminals which resembles each user. For user we have provided a list of sub API's available 
         that is printed at the start of the program. Based on the sub API that user selects, it prompts to enter required data which will be 
@@ -29,7 +31,7 @@ Implementation details:
         socket.
         In parallel with requesting inputs from user, this program/file checks for any live tweets or messages on the socket from server and prints
         these to console.
-    4. API details:
+   4. API details:
         a. Server:
             Server exposes '/api' to connect from outside world. Sub API's/Sub URI's that are allowed and need to be sent in REST message are as follows
             1. register - POST
