@@ -3,8 +3,10 @@
 Program Execution:
    1. Execute 'dotnet build' to generate messageformat dll which is shared between client and server.
    2. Execute below commands for server and client ( you can use websocket plugin as well)
-        Server: 'dotnet fsi --langversion:preview .\ServerWithSocket-bonus.fsx'
-        Client: 'dotnet fsi --langversion:preview .\Client-bonus.fsx'
+        
+      Server: 'dotnet fsi --langversion:preview .\ServerWithSocket-bonus.fsx'
+        
+      Client: 'dotnet fsi --langversion:preview .\Client-bonus.fsx'
    
    Server URL to connect: 'ws://127.0.0.1:8080/api'
    
